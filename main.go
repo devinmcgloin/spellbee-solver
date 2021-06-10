@@ -29,7 +29,10 @@ func main() {
 		return len(bag[i]) > len(bag[j])
 	})
 
+	fmt.Println("All Matches: ")
 	fmt.Println(bag)
+
+	fmt.Println("\nAll Pentagrams:")
 
 	for _, word := range bag {
 		matched := true
@@ -39,6 +42,7 @@ func main() {
 				break
 			}
 		}
+
 		if matched {
 			fmt.Println(word)
 		}
@@ -48,6 +52,7 @@ func main() {
 func recur(letters []string, trie *prefixtree.Tree, bag *[]string) {
 	word := strings.Join(letters[:], "")
 	val, err := trie.Find(word)
+
 	if err == prefixtree.ErrPrefixNotFound {
 		return
 	}
