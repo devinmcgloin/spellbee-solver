@@ -2,17 +2,27 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
-	"github.com/beevik/prefixtree"
 	"os"
 	"sort"
 	"strings"
+
+	"github.com/beevik/prefixtree"
 )
 
-var allowedCharacters = []string{"E", "A", "G", "C", "N", "I", "F"}
-var requiredCharacter = "F"
+var requiredCharacter string
+var allowedCharacters string
+
+func init() {
+	flag.StringVar(&requiredCharacter, "required", "F", "required character")
+	flag.StringVar(&allowedCharacters, "allowed", "EAGCNIF", "allowed character")
+}
 
 func main() {
+	flag.Parse()
+	fmt.Printf("Solving for allowed characters %s, and required character %s\n", allowedCharacters, requiredCharacter)
+
 	wordList, _ := readLines("Collins Scrabble Words (2019).txt")
 
 	trie := prefixtree.New()
@@ -36,7 +46,7 @@ func main() {
 
 	for _, word := range bag {
 		matched := true
-		for _, character := range allowedCharacters {
+		for _, character := range strings.Split(allowedCharacters, "") {
 			if !strings.Contains(word, character) {
 				matched = false
 				break
@@ -61,7 +71,7 @@ func recur(letters []string, trie *prefixtree.Tree, bag *[]string) {
 		*bag = append(*bag, word)
 	}
 
-	for _, character := range allowedCharacters {
+	for _, character := range strings.Split(allowedCharacters, "") {
 		recur(append(letters, character), trie, bag)
 	}
 }
