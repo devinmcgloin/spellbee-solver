@@ -39,7 +39,7 @@ func main() {
 		return len(bag[i]) > len(bag[j])
 	})
 
-	fmt.Println("All Matches: ")
+	fmt.Printf("All Matches (%d):\n", len(bag))
 	fmt.Println(bag)
 
 	fmt.Println("\nAll Pentagrams:")
