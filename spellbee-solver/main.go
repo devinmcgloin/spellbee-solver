@@ -42,7 +42,7 @@ func main() {
 	fmt.Printf("All Matches (%d):\n", len(bag))
 	fmt.Println(bag)
 
-	fmt.Println("\nAll Pentagrams:")
+	fmt.Println("\nAll Pangrams:")
 
 	for _, word := range bag {
 		matched := true
