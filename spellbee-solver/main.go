@@ -38,6 +38,7 @@ func main() {
 	sort.Slice(bag, func(i, j int) bool {
 		return len(bag[i]) > len(bag[j])
 	})
+	bag = unique(bag)
 
 	fmt.Printf("All Matches (%d):\n", len(bag))
 	fmt.Println(bag)
@@ -89,4 +90,16 @@ func readLines(path string) ([]string, error) {
 		lines = append(lines, scanner.Text())
 	}
 	return lines, scanner.Err()
+}
+
+func unique(array []string) []string {
+	keys := make(map[string]bool)
+	list := []string{}
+	for _, entry := range array {
+		if _, value := keys[entry]; !value {
+			keys[entry] = true
+			list = append(list, entry)
+		}
+	}
+	return list
 }
